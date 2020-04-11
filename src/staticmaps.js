@@ -26,7 +26,46 @@ const xToLon = (x, zoom) => x / (2 ** zoom) * 360 - 180;
 
 const LINE_RENDER_CHUNK_SIZE = 1000;
 
+/**
+ * @typedef LngLat
+ * @type number[]
+ */
+
+/**
+ * @typedef Vector2
+ * @type number[]
+ */
+
+/**
+ * @typedef StaticMapsOptions
+ * @type Object
+ * @property {number} width
+ * @property {number} height
+ * @property {?number} paddingX Minimum distance in px between map features and map border
+ * @property {?number} paddingY Minimum distance in px between map features and map border
+ * @property {?string} tileUrl Tile server URL for the map base layer
+ * @property {?number} tileSize Tile size in pixel
+ * @property {?string[]} subdomains Subdomains of tile server
+ * @property {?number} tileRequestTimeout Timeout for the tiles request
+ * @property {?Object} tileRequestHeader Additional headers for the tiles request
+ * @property {?number} tileRequestLimit Limit concurrent connections to the tiles server
+ * @property {?Object} zoomRange Defines the range of zoom levels to try
+ * @property {?number} zoomRange.max Max zoom
+ * @property {?number} zoomRange.min Min zoom
+ * @property {?number} maxZoom DEPRECATED: Use zoomRange.max instead: forces zoom to stay at
+ *  least this far from the surface, useful for tile servers that error on high levels
+ * @property {?Boolean} reverseY If true, reverse the y index of the tiles to match the TMS
+ *  naming format
+ */
+
+
+/**
+ * @property {Image} image
+ */
 class StaticMaps {
+  /**
+   * @param {StaticMapsOptions} options
+   */
   constructor(options = {}) {
     this.options = options;
 
@@ -61,26 +100,41 @@ class StaticMaps {
     this.zoom = 0;
   }
 
+  /**
+   * @param {PolyLineOptions} options
+   * @param options
+   */
   addLine(options) {
     this.lines.push(new Polyline(options));
   }
 
+  /**
+   * @param {MarkerOptions} options
+   */
   addMarker(options) {
     this.markers.push(new IconMarker(options));
   }
 
+  /**
+   * @param {PolyLineOptions} options
+   */
   addPolygon(options) {
     this.lines.push(new Polyline(options));
   }
 
+  /**
+   * @param {TextOptions} options
+   */
   addText(options) {
     this.text.push(new Text(options));
   }
 
   /**
-    * Render static map with all map features that were added to map before
-    */
-  async render(center, zoom) {
+   * Render static map with all map features that were added to map before
+   * @param {?LngLat} center
+   * @param {?number} zoom
+   */
+  async render(center = null, zoom = null) {
     if (!this.lines && !this.markers && !this.polygons && !(center && zoom)) {
       throw new Error('Cannot render empty map: Add  center || lines || markers || polygons.');
     }

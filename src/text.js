@@ -1,4 +1,20 @@
+/**
+ * @typedef TextOptions
+ * @type Object
+ * @property {Vector2} coord Coordinates of the text ([x,y])
+ * @property {string} text Text to render
+ * @property {?string} color Stroke color of the text
+ * @property {?string} width Stroke width of the text
+ * @property {?string} fill Fill color of the text
+ * @property {?number} size Font-size of the text
+ * @property {?string} font Font-family of the text
+ * @property {?"start"|"middle"|"end"} anchor Anchor of the text
+ */
+
 export default class Text {
+  /**
+   * @param {TextOptions} options
+   */
   constructor(options = {}) {
     this.options = options;
     this.coord = this.options.coord;

@@ -1,4 +1,20 @@
+
+/**
+ * @typedef MarkerOptions
+ * @type Object
+ * @property {number} width
+ * @property {number} height
+ * @property {LngLat[]} coords Coordinates of the marker ([Lng, Lat])
+ * @property {string} img Marker image path or URL
+ * @property {?number} offsetX X offset of the marker image, default is width/2
+ * @property {?number} offsetY Y offset of the marker image, default is height
+ */
+
+
 export default class {
+  /**
+   * @param options {MarkerOptions}
+   */
   constructor(options = {}) {
     this.options = options;
 

@@ -3,6 +3,9 @@ import last from 'lodash.last';
 
 import asyncQueue from './helper/asyncQueue';
 
+/**
+ * @class Image
+ */
 export default class Image {
   constructor(options = {}) {
     this.options = options;

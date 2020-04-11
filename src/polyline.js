@@ -2,8 +2,20 @@ import isEqual from 'lodash.isequal';
 import first from 'lodash.first';
 import last from 'lodash.last';
 
+/**
+ * @typedef PolyLineOptions
+ * @type Object
+ * @property {LngLat[]} coords Coordinates of the polyline ([[Lng, Lat], ... ,[Lng, Lat]])
+ * @property {?string} color Stroke color of the polyline
+ * @property {?string} fill Fill color of the polyline
+ * @property {?string} width Stroke width of the polyline
+ * @property {?boolean} simplify
+ */
 
 export default class Polyline {
+  /**
+   * @param {PolyLineOptions} options
+   */
   constructor(options = {}) {
     this.options = options;
     this.coords = this.options.coords;
